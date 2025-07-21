@@ -1,6 +1,7 @@
 use crate::{data_structures::vertex_index_map::PointIndexMap, geometry::traits::RealNumber};
 use nalgebra::{SVector, Scalar};
 
+#[derive(Debug, Clone)]
 pub struct IndexedVertices<const D: usize, S: Scalar> {
     /// Unique points
     pub points: Vec<SVector<S, D>>,

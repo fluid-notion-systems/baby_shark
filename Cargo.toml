@@ -2,22 +2,19 @@
 name = "baby_shark"
 version = "0.3.10"
 edition = "2021"
-description="Geometry processing library"
-license="MIT"
+description = "Geometry processing library"
+license = "MIT"
 homepage = "https://github.com/dima634/baby_shark"
 repository = "https://github.com/dima634/baby_shark"
 keywords = ["mesh", "mesh-processing", "geometry", "3d", "algorithms"]
 categories = ["graphics", "games", "data-structures"]
-exclude = [
-    ".github/workflows/*",
-    ".vscode/*",
-    "docs/*",
-    "assets/*",
-    "TODO.md"
-]
+exclude = [".github/workflows/*", ".vscode/*", "docs/*", "assets/*", "TODO.md"]
 
 [lib]
 crate-type = ["lib", "cdylib"]
+
+[features]
+bevy = ["dep:bevy_mesh"]
 
 [profile.release-debug-info]
 inherits = "release"
@@ -25,7 +22,7 @@ debug = true
 
 [profile.dev-opt]
 inherits = "dev"
-opt-level=3
+opt-level = 3
 
 [dependencies]
 nalgebra = "0.33.2"
@@ -35,6 +32,7 @@ rayon = "1.8.1"
 simba = "0.8.1"
 num-traits = "0.2.15"
 bitflags = "2.4.0"
+bevy_mesh = { version = "0.16", optional = true }
 
 [target.'cfg(target_arch ="wasm32")'.dependencies]
 getrandom = { version = "0.2", features = ["js"] }
