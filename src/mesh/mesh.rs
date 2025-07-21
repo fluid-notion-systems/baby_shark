@@ -252,6 +252,7 @@ mod bevy_conversions {
         }
     }
 
+    //TODO: make generic
     impl From<Mesh<f32>> for BevyMesh {
         fn from(mesh: Mesh<f32>) -> Self {
             let vertices = mesh.vertices();
@@ -282,6 +283,17 @@ mod bevy_conversions {
                 bevy_mesh.compute_flat_normals();
             }
 
+            if bevy_mesh.attribute(BevyMesh::ATTRIBUTE_UV_0).is_none() {
+                let vertex_count = bevy_mesh
+                    .attribute(BevyMesh::ATTRIBUTE_POSITION)
+                    .map(|attr| match attr {
+                        bevy_mesh::VertexAttributeValues::Float32x3(positions) => positions.len(),
+                        _ => 0,
+                    })
+                    .unwrap_or(0);
+                let simple_uvs = vec![[0.0, 0.0]; vertex_count];
+                bevy_mesh.insert_attribute(BevyMesh::ATTRIBUTE_UV_0, simple_uvs);
+            }
             bevy_mesh
         }
     }
