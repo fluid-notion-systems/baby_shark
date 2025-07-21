@@ -14,7 +14,8 @@ exclude = [".github/workflows/*", ".vscode/*", "docs/*", "assets/*", "TODO.md"]
 crate-type = ["lib", "cdylib"]
 
 [features]
-bevy = ["dep:bevy_mesh"]
+bevy = ["dep:bevy_mesh", "dep:bevy_asset"]
+bytemuck = ["dep:bytemuck", "nalgebra/bytemuck"]
 
 [profile.release-debug-info]
 inherits = "release"
@@ -32,7 +33,9 @@ rayon = "1.8.1"
 simba = "0.8.1"
 num-traits = "0.2.15"
 bitflags = "2.4.0"
+bytemuck = { version = "1.5", optional = true }
 bevy_mesh = { version = "0.16", optional = true }
+bevy_asset = { version = "0.16", optional = true }
 
 [target.'cfg(target_arch ="wasm32")'.dependencies]
 getrandom = { version = "0.2", features = ["js"] }

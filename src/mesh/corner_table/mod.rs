@@ -17,9 +17,9 @@ pub use boundary::BoundaryRing;
 pub use corner::CornerId;
 pub use edge::EdgeId;
 pub use face::FaceId;
+pub use traversal::IncidentEdge;
 pub use vertex::VertexId;
 pub use walker::CornerWalker;
-pub use traversal::IncidentEdge;
 
 pub type CornerTableF = CornerTable<f32>;
 pub type CornerTableD = CornerTable<f64>;
@@ -49,6 +49,7 @@ impl<S: RealNumber> CornerTable<S> {
     /// * Each vertex has a valid corner.
     /// * Each corner has a valid vertex.
     /// Useful for debugging.
+    #[allow(dead_code)]
     fn validate_topology(&self) -> bool {
         for corner_idx in 0..self.corners.len() {
             let corner = &self.corners[corner_idx];
